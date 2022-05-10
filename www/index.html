@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello wasm-pack!</title>
+    <style>
+      #fps {
+        white-space: pre;
+        font-family: monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
+    <canvas style="display:block; margin:auto" id = "automaton-canvas">
+      This browser does not support canvas
+    </canvas>
+    <div style="display:block; margin:auto; text-align:center;">
+      <button id="run-toggle">Play/Pause</button>
+      <input type="number" id="ticks-per-frame">
+      <button id="killer">Kill</button>
+      <button id="randomize">Randomize</button>
+    </div>
+    <div id="fps"></div>
+    <script src="./bootstrap.js"></script>
+  </body>
+</html>
