@@ -52,7 +52,7 @@ pub static mut U: Universe = Universe {
         cells_secondary: [CellState::Dead; SIZE],
         active_buffer: BufferState::Primary,
     },
-    byte_store: [0; SIZE / 8 + (SIZE % 8 != 0) as usize],
+    // byte_store: [0; SIZE / 8 + (SIZE % 8 != 0) as usize],
 };
 
 #[inline(always)]
@@ -127,19 +127,19 @@ pub fn get_height() -> u32 {
     return unsafe { U.height };
 }
 
-#[wasm_bindgen]
-pub fn init() {
-    unsafe {
-        for i in 0..SIZE {
-            U.cells.write()[i] = if i % 2 == 0 || i % 7 == 0 {
-                CellState::Alive
-            } else {
-                CellState::Dead
-            };
-        }
-        U.cells.finish_write();
-    }
-}
+// #[wasm_bindgen]
+// pub fn init() {
+//     unsafe {
+//         for i in 0..SIZE {
+//             U.cells.write()[i] = if i % 2 == 0 || i % 7 == 0 {
+//                 CellState::Alive
+//             } else {
+//                 CellState::Dead
+//             };
+//         }
+//         U.cells.finish_write();
+//     }
+// }
 
 #[wasm_bindgen]
 pub fn tick_life() {

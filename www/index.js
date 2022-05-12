@@ -10,7 +10,7 @@ const ALIVE_COLOR = "#000000";
 // const width = universe.get_width();
 // const height = universe.get_height();
 
-wasm.init();
+wasm.randomize_state();
 const width = wasm.get_width();
 const height = wasm.get_height();
 

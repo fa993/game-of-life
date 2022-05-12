@@ -156,7 +156,7 @@ pub struct Universe {
     width: u32,
     height: u32,
     cells: DoubleBuffer<[CellState; SIZE]>,
-    byte_store: [u8; SIZE / 8 + (SIZE % 8 != 0) as usize],
+    // byte_store: [u8; SIZE / 8 + (SIZE % 8 != 0) as usize],
 }
 
 // impl Universe {
