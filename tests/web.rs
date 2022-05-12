@@ -51,7 +51,6 @@ pub fn test_randomize() {
     assert_eq!(true, true);
 }
 
-
 #[wasm_bindgen_test]
 pub fn test_reflects() {
     assert_eq!(reflect_y((4, 5)), (-4, 5));

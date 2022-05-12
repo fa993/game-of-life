@@ -1,4 +1,4 @@
-import { Universe } from "automaton-engine";
+import * as wasm from "automaton-engine";
 import { memory } from "automaton-engine/automaton_engine_bg";
 
 const CELL_SIZE = 5; // px
@@ -6,9 +6,13 @@ const GRID_COLOR = "#CCCCCC";
 const DEAD_COLOR = "#FFFFFF";
 const ALIVE_COLOR = "#000000";
 
-const universe = Universe.new();
-const width = universe.get_width();
-const height = universe.get_height();
+// const universe = Universe.new();
+// const width = universe.get_width();
+// const height = universe.get_height();
+
+wasm.init();
+const width = wasm.get_width();
+const height = wasm.get_height();
 
 const can = document.getElementById("automaton-canvas");
 can.height = (CELL_SIZE + 1) * height + 1;
@@ -70,7 +74,7 @@ const renderLoop = () => {
   fpTimer.tick();
 
   for(let i = 0; i < tick_count; i++) {
-    universe.tick_life();
+    wasm.tick_life();
   }
 
   drawGrid();
@@ -101,7 +105,8 @@ const drawGrid = () => {
 
 const drawCells = () => {
 
-  const cellPtr = universe.get_pointer();
+  // const cellPtr = universe.get_pointer();
+  const cellPtr = wasm.get_pointer();
   const cells = new Uint8Array(memory.buffer, cellPtr, width * height);
 
   ctx.beginPath();
@@ -186,11 +191,14 @@ can.addEventListener('click', event => {
   console.log(col);
 
   if(event.shiftKey) {
-    universe.insert_glider(row, col);
+    // universe.insert_glider(row, col);
+    wasm.insert_glider(row, col);
   } else if(event.altKey) {
-    universe.insert_pulsar(row, col);
+    // universe.insert_pulsar(row, col);
+    wasm.insert_pulsar(row, col);
   } else {
-    universe.toggle(row, col);
+    wasm.toggle(row, col);
+    // universe.toggle(row, col);
   }
 
   drawGrid();
@@ -202,7 +210,8 @@ const killAll = document.getElementById("killer");
 
 killAll.addEventListener('click', () => {
 
-  universe.set_dimensions(width, height);
+  // universe.set_dimensions(width, height);
+  wasm.kill_all();
 
 });
 
@@ -212,7 +221,8 @@ randomizer.addEventListener('click', () => {
 
   console.log("rdmise");
 
-  universe.randomize_state();
+  // universe.randomize_state();
+  wasm.randomize_state();
   drawGrid();
   drawCells();
 
